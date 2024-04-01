@@ -1,12 +1,10 @@
 package com.example.charginganimationsdemo.views.activities
 
-import android.app.KeyguardManager
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.os.BatteryManager
-import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
@@ -18,8 +16,6 @@ import com.example.charginganimationsdemo.databinding.ActivityLockScreenViewBind
 import com.example.charginganimationsdemo.interfaces.DoubleClickHandler
 import com.example.charginganimationsdemo.interfaces.OnDoubleClickListener
 import com.example.charginganimationsdemo.interfaces.OnSingleClickListener
-import com.example.charginganimationsdemo.interfaces.SingleClickListener
-import com.example.charginganimationsdemo.services.Service
 
 class LockScreenViewActivity : AppCompatActivity(), OnDoubleClickListener , OnSingleClickListener{
 
@@ -61,9 +57,6 @@ class LockScreenViewActivity : AppCompatActivity(), OnDoubleClickListener , OnSi
 
         binding.animationView.setAnimation(R.raw.anim20)
 
-        binding.root.setOnClickListener {
-            doubleClickHandler.handleClick()
-        }
         binding.root.setOnClickListener {
             doubleClickHandler.handleClick()
             onSingleClick()
