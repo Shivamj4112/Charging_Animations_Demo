@@ -12,6 +12,7 @@ import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.view.WindowManager
+import com.example.charginganimationsdemo.interfaces.OnSingleClickListener
 import com.example.charginganimationsdemo.views.CustomLockScreenView
 
 class Service : Service() {
@@ -35,6 +36,13 @@ class Service : Service() {
         super.onCreate()
 
 
+//        val  singClick = customLockScreenView?.findViewById<ImageView>(R.id.iv_close)
+//        customLockScreenView?.setCloseButtonClickListener {
+//            // Handle close button click here
+//            singClick?.visibility = View.VISIBLE
+//        }
+
+
         val filter = IntentFilter().apply {
             addAction(Intent.ACTION_POWER_CONNECTED)
             addAction(Intent.ACTION_POWER_DISCONNECTED)
@@ -54,10 +62,18 @@ class Service : Service() {
 
     private fun powerWasConnected() {
 
+
         windowManager = getSystemService(WINDOW_SERVICE) as WindowManager?
 
         if (customLockScreenView == null) {
             customLockScreenView = CustomLockScreenView(this)
+
+            customLockScreenView?.setClick(object : OnSingleClickListener {
+                override fun onSingleClick() {
+                    Log.d("Clicks Service", "Custom view clicked!")
+
+                }
+            })
 
             Log.d("TAG", "powerWasConnected: Power is connected")
             val layoutParams = WindowManager.LayoutParams(
