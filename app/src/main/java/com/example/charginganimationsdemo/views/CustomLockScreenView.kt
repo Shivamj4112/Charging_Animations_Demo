@@ -26,9 +26,10 @@ class CustomLockScreenView @JvmOverloads constructor(
         LayoutInflater.from(context).inflate(R.layout.custom_lock_screen, this, true)
         val lottie = findViewById<LottieAnimationView>(R.id.animationView)
         val singleClick = findViewById<RelativeLayout>(R.id.view2)
+//        val battery = findViewById<TextView>(R.id.tvPercentage)
 
 
-
+//        battery.text = getBatteryPercentage(context).toString() + "%"
         lottie.setAnimation(R.raw.anim20)
 
         singleClick.setOnClickListener {
@@ -38,10 +39,7 @@ class CustomLockScreenView @JvmOverloads constructor(
                 findViewById<ImageView>(R.id.iv_close).visibility = View.INVISIBLE
             }, 2000)
 //            clickListener?.onSingleClick()
+
         }
-
-
     }
-
-
 }

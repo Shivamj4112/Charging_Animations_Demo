@@ -4,7 +4,6 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
-import android.os.BatteryManager
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
@@ -24,14 +23,15 @@ class LockScreenViewActivity : AppCompatActivity(), OnDoubleClickListener , OnSi
 
     private val batteryReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
-            val batteryStatus: Intent? = IntentFilter(Intent.ACTION_BATTERY_CHANGED).let { ifilter ->
-                context?.registerReceiver(null, ifilter)
-            }
+//            val batteryStatus: Intent? = IntentFilter(Intent.ACTION_BATTERY_CHANGED).let { ifilter ->
+//                context?.registerReceiver(null, ifilter)
+            var batteryPct = getBatteryPercentage(context)
+//            }
 
-            val level: Int? = batteryStatus?.getIntExtra(BatteryManager.EXTRA_LEVEL, -1)
-            val scale: Int? = batteryStatus?.getIntExtra(BatteryManager.EXTRA_SCALE, -1)
-
-            val batteryPct: Float = (level ?: 0).toFloat() / (scale ?: 100).toFloat() * 100
+//            val level: Int? = batteryStatus?.getIntExtra(BatteryManager.EXTRA_LEVEL, -1)
+//            val scale: Int? = batteryStatus?.getIntExtra(BatteryManager.EXTRA_SCALE, -1)
+//
+//            val batteryPct: Float = (level ?: 0).toFloat() / (scale ?: 100).toFloat() * 100
 //            val roundedBatteryPct = batteryPct.toInt() // Round the battery percentage
 
             binding.tvPercentage.text = "$batteryPct %"
@@ -79,5 +79,10 @@ class LockScreenViewActivity : AppCompatActivity(), OnDoubleClickListener , OnSi
         Handler().postDelayed({ binding.imgClick.setVisibility(View.INVISIBLE) }, 2000)
     }
 
-
+    fun getBatteryPercentage(context: Context?): Int {
+        val registerReceiver =
+            context?.registerReceiver(null, IntentFilter("android.intent.action.BATTERY_CHANGED"))
+        return (registerReceiver!!.getIntExtra("level", -1)
+            .toFloat() / registerReceiver.getIntExtra("scale", -1).toFloat() * 100.0f).toInt()
+    }
 }

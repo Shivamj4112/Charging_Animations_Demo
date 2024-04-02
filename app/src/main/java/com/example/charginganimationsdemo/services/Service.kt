@@ -6,15 +6,18 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.graphics.PixelFormat
 import android.os.Build
 import android.os.IBinder
 import android.util.Log
 import android.view.Gravity
+import android.view.View
 import android.view.WindowManager
-import com.example.charginganimationsdemo.interfaces.OnSingleClickListener
+import com.airbnb.lottie.LottieAnimationView
+import com.example.charginganimationsdemo.R
 import com.example.charginganimationsdemo.views.CustomLockScreenView
 
-class Service : Service(), OnSingleClickListener {
+class Service : Service() {
 
     private var customLockScreenView: CustomLockScreenView? = null
     private var windowManager: WindowManager? = null
@@ -52,9 +55,18 @@ class Service : Service(), OnSingleClickListener {
 
     private fun powerWasConnected() {
 
+        fun getBatteryPercentage(context: Context): Int {
+            val registerReceiver = context.registerReceiver(
+                null,
+                IntentFilter("android.intent.action.BATTERY_CHANGED")
+            )
+            return (registerReceiver!!.getIntExtra("level", -1)
+                .toFloat() / registerReceiver.getIntExtra("scale", -1).toFloat() * 100.0f).toInt()
+        }
 
 
         windowManager = getSystemService(WINDOW_SERVICE) as WindowManager?
+
 
         if (customLockScreenView == null) {
             customLockScreenView = CustomLockScreenView(this)
@@ -65,7 +77,8 @@ class Service : Service(), OnSingleClickListener {
 //
 //                }
 //            })
-//            customLockScreenView!!.findViewById<LottieAnimationView>(R.id.animationView).setAnimation(R.raw.anim20)
+            customLockScreenView!!.findViewById<LottieAnimationView>(R.id.animationView)
+                .setAnimation(R.raw.anim20)
 
 
             Log.d("TAG", "powerWasConnected: Power is connected")
@@ -76,14 +89,27 @@ class Service : Service(), OnSingleClickListener {
                     WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
                 else
                     WindowManager.LayoutParams.TYPE_SYSTEM_ALERT,
-                WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL
-                        or WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
-                android.graphics.PixelFormat.TRANSLUCENT,
+                WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or
+                        WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS or
+                        WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN or
+                        WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED or
+                        WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                PixelFormat.TRANSLUCENT
 
-                )
+
+            )
             layoutParams.gravity = Gravity.CENTER
-            windowManager?.addView(customLockScreenView, layoutParams)
 
+
+            customLockScreenView?.systemUiVisibility =
+                customLockScreenView?.systemUiVisibility ?: (0 or
+                        View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
+                        View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or
+                        View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION or
+                        View.SYSTEM_UI_FLAG_FULLSCREEN or
+                        View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY)
+
+            windowManager?.addView(customLockScreenView, layoutParams)
 
 //            Handler().postDelayed({
 //
@@ -104,16 +130,12 @@ class Service : Service(), OnSingleClickListener {
 
     private fun clearFilter() {
         customLockScreenView?.let {
-            windowManager?.removeView(it)
+            windowManager?.removeViewImmediate(it)
             customLockScreenView = null
         }
     }
-
-    override fun onSingleClick() {
-        Log.d("Clicks Service222", "Custom view clicked!")
-    }
-
 }
+
 
 
 //class Service : Service() {
@@ -160,8 +182,6 @@ class Service : Service(), OnSingleClickListener {
 //                createNotification(),
 //                ServiceInfo.FOREGROUND_SERVICE_TYPE_CONNECTED_DEVICE
 //            )
-//
-//
 //        }
 //    }
 //

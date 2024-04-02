@@ -20,7 +20,6 @@
                 binding.btApply.setOnClickListener {
 
                     startService(Intent(this, Service::class.java))
-//                    startActivity(Intent(this@MainActivity,LockScreenViewActivity::class.java))
                 }
 
 
