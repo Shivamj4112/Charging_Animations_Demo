@@ -89,7 +89,12 @@ class Service : Service() {
                     WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
                 else
                     WindowManager.LayoutParams.TYPE_SYSTEM_ALERT,
-                WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or
+                WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED or
+                        WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD or
+                        WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON or
+                        WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON or
+
+                        WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or
                         WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS or
                         WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN or
                         WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED or
@@ -99,7 +104,7 @@ class Service : Service() {
 
             )
             layoutParams.gravity = Gravity.CENTER
-
+            windowManager?.addView(customLockScreenView, layoutParams)
 
             customLockScreenView?.systemUiVisibility =
                 customLockScreenView?.systemUiVisibility ?: (0 or
@@ -109,7 +114,6 @@ class Service : Service() {
                         View.SYSTEM_UI_FLAG_FULLSCREEN or
                         View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY)
 
-            windowManager?.addView(customLockScreenView, layoutParams)
 
 //            Handler().postDelayed({
 //
