@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity() {
 
             imgPreview.setOnClickListener {
 
-                imgOpenSettings.visibility = View.GONE
+                ivOpenSettings.visibility = View.GONE
                 btApply.visibility = View.GONE
                 ivBack.visibility = View.GONE
                 imgPreview.visibility = View.GONE
@@ -56,7 +56,7 @@ class MainActivity : AppCompatActivity() {
 
             root.setOnClickListener {
 
-                imgOpenSettings.visibility = View.VISIBLE
+                ivOpenSettings.visibility = View.VISIBLE
                 btApply.visibility = View.VISIBLE
                 ivBack.visibility = View.VISIBLE
                 imgPreview.visibility = View.VISIBLE
@@ -70,6 +70,11 @@ class MainActivity : AppCompatActivity() {
                 editor.apply()
                 startService(Intent(this@MainActivity, Service::class.java))
 
+            }
+
+            ivOpenSettings.setOnClickListener {
+
+                startActivity(Intent(this@MainActivity, SettingsActivity::class.java))
             }
 
         }

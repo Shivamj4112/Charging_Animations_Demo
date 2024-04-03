@@ -90,7 +90,7 @@
                 android:textSize="@dimen/_14ssp" />
 
             <ImageView
-                android:id="@+id/imgOpenSettings"
+                android:id="@+id/iv_OpenSettings"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"

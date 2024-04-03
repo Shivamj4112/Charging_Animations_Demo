@@ -15,7 +15,7 @@
         android:background="@color/color_toolbar">
 
         <ImageView
-            android:id="@+id/imgBack"
+            android:id="@+id/iv_Back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -28,7 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/imgBack"
+            android:layout_toRightOf="@+id/iv_Back"
             android:fontFamily="@font/regular"
             android:text="@string/string_settings"
             android:textColor="@color/white"
@@ -59,6 +59,7 @@
             <RelativeLayout
                 android:id="@+id/layoutSound"
                 android:layout_width="match_parent"
+                android:visibility="gone"
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp">
 
@@ -151,6 +152,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
+                android:visibility="gone"
                 android:gravity="center_vertical">
 
                 <TextView
