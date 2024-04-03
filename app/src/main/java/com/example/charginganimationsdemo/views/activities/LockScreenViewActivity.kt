@@ -52,7 +52,8 @@ class LockScreenViewActivity : AppCompatActivity(), OnDoubleClickListener , OnSi
         )
 
         window.decorView.apply {
-            systemUiVisibility = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+            systemUiVisibility =
+                View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
         }
 
         binding = ActivityLockScreenViewBinding.inflate(layoutInflater)
