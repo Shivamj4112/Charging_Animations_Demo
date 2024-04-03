@@ -35,7 +35,7 @@ class ItemAdapter(var onClick: (Int) -> Unit) : RecyclerView.Adapter<ItemAdapter
 
             root.setOnClickListener {
                 onClick.invoke(list[position])
-//                imgDone.visibility = View.VISIBLE
+                //                imgDone.visibility = View.VISIBLE
             }
         }
     }

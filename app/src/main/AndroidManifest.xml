@@ -40,6 +40,7 @@
 
         <activity
             android:name=".views.activities.LockScreenViewActivity"
+            android:excludeFromRecents="true"
             android:exported="false" />
         <activity
             android:name=".views.activities.MainActivity"

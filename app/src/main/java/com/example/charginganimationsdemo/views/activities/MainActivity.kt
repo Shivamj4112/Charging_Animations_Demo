@@ -13,7 +13,7 @@ import com.example.charginganimationsdemo.services.Service
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var sharedPref: SharedPreferences
     private lateinit var editor: SharedPreferences.Editor
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,7 +22,8 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
+        sharedPref = getSharedPreferences("SetAnimation", MODE_PRIVATE)
+        editor = sharedPref.edit()
         val anim = intent.getIntExtra("anim", 0)
 
         window.addFlags(
@@ -39,6 +40,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.apply {
+
+            layoutVideo.visibility = View.GONE
 
             animationView.setAnimation(anim)
 
@@ -62,7 +65,11 @@ class MainActivity : AppCompatActivity() {
 
 
             btApply.setOnClickListener {
+
+                editor.putInt("animation", anim)
+                editor.apply()
                 startService(Intent(this@MainActivity, Service::class.java))
+
             }
 
         }

@@ -218,74 +218,12 @@ class Service : Service() {
         lockScreenIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
         context.startActivity(lockScreenIntent)
 
-
     }
 
-//    private fun powerWasConnected(context: Context) {
-//        Log.d("TAG", "powerWasConnected: Power is connected")
-//
-//
-//        windowManager = getSystemService(WINDOW_SERVICE) as WindowManager?
-//
-//
-//        if (customLockScreenView == null) {
-//            customLockScreenView = CustomLockScreenView(this)
-//
-////            customLockScreenView!!.setClick(object : OnSingleClickListener {
-////                override fun onSingleClick() {
-////                    Log.d("Clicks Service", "Custom view clicked!")
-////
-////                }
-////            })
-//            customLockScreenView!!.findViewById<LottieAnimationView>(R.id.animationView)
-//                .setAnimation(R.raw.anim20)
-//
-//
-//            Log.d("TAG", "powerWasConnected: Power is connected")
-//            val layoutParams = WindowManager.LayoutParams(
-//                WindowManager.LayoutParams.MATCH_PARENT,
-//                WindowManager.LayoutParams.MATCH_PARENT,
-//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
-//                    WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
-//                else
-//                    WindowManager.LayoutParams.TYPE_SYSTEM_ALERT,
-//                WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or
-//                        WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED or
-//                        WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS or
-////                        WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN or
-//                        WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED or
-//                        WindowManager.LayoutParams.FLAG_FULLSCREEN,
-//                PixelFormat.TRANSLUCENT
-//
-//
-//            )
-////            layoutParams.gravity = Gravity.CENTER
-//            windowManager?.addView(customLockScreenView, layoutParams)
-//
-////            customLockScreenView?.systemUiVisibility =
-////                customLockScreenView?.systemUiVisibility ?: (0 or
-////                        View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
-////                        View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or
-////                        View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION or
-////                        View.SYSTEM_UI_FLAG_FULLSCREEN or
-////                        View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY)
-//
-//
-////            Handler().postDelayed({
-////
-////                customLockScreenView?.let {
-////                    windowManager?.removeView(it)
-////                    customLockScreenView = null
-////                }
-////
-////            }, 5000)
-//
-//        }
-//
-//    }
+
 
     private fun powerWasDisconnected(context: Context) {
-        clearFilter()
+
         Log.d("TAG", "powerWasDisconnected: Power is disconnected")
     }
 
@@ -305,9 +243,10 @@ class Service : Service() {
     }
 
     private fun clearFilter() {
-        customLockScreenView?.let {
-            windowManager?.removeViewImmediate(it)
-            customLockScreenView = null
-        }
+
+//        customLockScreenView?.let {
+//            windowManager?.removeViewImmediate(it)
+//            customLockScreenView = null
+//        }
     }
 }
