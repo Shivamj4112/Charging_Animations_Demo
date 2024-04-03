@@ -16,7 +16,7 @@ import android.util.Log
 import android.view.WindowManager
 import androidx.core.app.NotificationCompat
 import com.example.charginganimationsdemo.R
-import com.example.charginganimationsdemo.views.CustomLockScreenView
+import com.example.charginganimationsdemo.util.CustomLockScreenView
 import com.example.charginganimationsdemo.views.activities.LockScreenViewActivity
 import com.example.charginganimationsdemo.views.activities.MainActivity
 

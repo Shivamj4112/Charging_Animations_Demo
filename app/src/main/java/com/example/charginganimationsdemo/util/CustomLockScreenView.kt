@@ -1,4 +1,4 @@
-package com.example.charginganimationsdemo.views
+package com.example.charginganimationsdemo.util
 
 import android.content.Context
 import android.os.Handler
