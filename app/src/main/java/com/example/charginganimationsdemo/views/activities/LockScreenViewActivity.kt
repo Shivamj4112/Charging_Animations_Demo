@@ -74,16 +74,13 @@ class LockScreenViewActivity : AppCompatActivity(), OnDoubleClickListener , OnSi
         unregisterReceiver(batteryReceiver)
 //        stopService(Intent(this, Service::class.java))
     }
-
     override fun onDoubleClick() {
         finish()
     }
-
     override fun onSingleClick() {
         binding.imgClick.setVisibility(View.VISIBLE)
         Handler().postDelayed({ binding.imgClick.setVisibility(View.INVISIBLE) }, 2000)
     }
-
     fun getBatteryPercentage(context: Context?): Int {
         val registerReceiver =
             context?.registerReceiver(null, IntentFilter("android.intent.action.BATTERY_CHANGED"))
