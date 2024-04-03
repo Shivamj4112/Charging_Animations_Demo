@@ -37,7 +37,7 @@ class LockScreenViewActivity : AppCompatActivity(), OnDoubleClickListener, OnSin
             val batteryPct: Float = (level ?: 0).toFloat() / (scale ?: 100).toFloat() * 100
             val roundedBatteryPct = batteryPct.toInt() // Round the battery percentage
 
-            binding.tvPercentage.text = "$batteryPct %"
+            binding.tvPercentage.text = "$roundedBatteryPct %"
         }
     }
 
@@ -49,30 +49,22 @@ class LockScreenViewActivity : AppCompatActivity(), OnDoubleClickListener, OnSin
 
         }
     }
-    private val powerConnectReceiver = object : BroadcastReceiver() {
-        override fun onReceive(context: Context?, intent: Intent?) {
-            if (intent?.action == Intent.ACTION_POWER_CONNECTED) {
-                Handler().postDelayed({
-                    finish()
-                }, 3000)
-            }
-        }
-    }
+//    private val powerConnectReceiver = object : BroadcastReceiver() {
+//        override fun onReceive(context: Context?, intent: Intent?) {
+//            if (intent?.action == Intent.ACTION_POWER_CONNECTED) {
+//                Handler().postDelayed({
+//                    finish()
+//                }, 3000)
+//            }
+//        }
+//    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
-//        editor = sharedPref.edit()
 
-        window.addFlags(
-            WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED or
-                    WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD or
-                    WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON or
-                    WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON or
-                    WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION
-        )
-
+        window.addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED or WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD or WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON or WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON or WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION)
         window.decorView.apply {
             systemUiVisibility =
                 View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
@@ -83,7 +75,7 @@ class LockScreenViewActivity : AppCompatActivity(), OnDoubleClickListener, OnSin
 
         registerReceiver(batteryReceiver, IntentFilter(Intent.ACTION_BATTERY_CHANGED))
         registerReceiver(powerDisconnectReceiver, IntentFilter(Intent.ACTION_POWER_DISCONNECTED))
-        registerReceiver(powerConnectReceiver, IntentFilter(Intent.ACTION_POWER_CONNECTED))
+//        registerReceiver(powerConnectReceiver, IntentFilter(Intent.ACTION_POWER_CONNECTED))
 
         getAnimation()
 
@@ -92,6 +84,9 @@ class LockScreenViewActivity : AppCompatActivity(), OnDoubleClickListener, OnSin
             onSingleClick()
         }
 
+        Handler().postDelayed({
+            finish()
+        }, 3000)
 
     }
 
