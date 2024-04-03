@@ -47,8 +47,13 @@ class LockScreenViewActivity : AppCompatActivity(), OnDoubleClickListener , OnSi
             WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED or
                     WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD or
                     WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON or
-                    WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON
+                    WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON or
+                    WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION
         )
+
+        window.decorView.apply {
+            systemUiVisibility = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+        }
 
         binding = ActivityLockScreenViewBinding.inflate(layoutInflater)
         setContentView(binding.root)
