@@ -30,54 +30,7 @@ class SettingsActivity : AppCompatActivity() {
             }
 
 
-            val durationItems = arrayOf("5 secs", "10 secs", "30 secs", "1 min", "loop")
-            val durationAdapter =
-                ArrayAdapter(this@SettingsActivity, R.layout.spinner_item, durationItems)
-            durationAdapter.setDropDownViewResource(R.layout.spinner_item)
-            spinnerDuration.adapter = durationAdapter
-
-
-            spinnerDuration.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-                override fun onItemSelected(
-                    parent: AdapterView<*>?,
-                    view: View?,
-                    position: Int,
-                    id: Long
-                ) {
-//                    val selectedDuration = durationItems[position]
-
-                    when (position) {
-
-                        0 -> {
-                            editor.putLong("playDuration", 5000)
-                            editor.apply()
-                        }
-
-                        1 -> {
-                            editor.putLong("playDuration", 10000)
-                            editor.apply()
-                        }
-
-                        2 -> {
-                            editor.putLong("playDuration", 30000)
-                            editor.apply()
-                        }
-
-                        3 -> {
-                            editor.putLong("playDuration", 100000)
-                            editor.apply()
-                        }
-
-                        4 -> {
-                            editor.putLong("playDuration", 0)
-                            editor.apply()
-                        }
-                    }
-                }
-
-                override fun onNothingSelected(parent: AdapterView<*>?) {
-                }
-            }
+            playDuration()
 
 
             val closingMethodItems = arrayOf("Double Click", "Single Click")
@@ -100,6 +53,55 @@ class SettingsActivity : AppCompatActivity() {
         }
 
 
+    }
+
+    private fun ActivitySettingsBinding.playDuration() {
+        val durationItems = arrayOf("5 secs", "10 secs", "30 secs", "1 min", "loop")
+        val durationAdapter =
+            ArrayAdapter(this@SettingsActivity, R.layout.spinner_item, durationItems)
+        durationAdapter.setDropDownViewResource(R.layout.spinner_item)
+        spinnerDuration.adapter = durationAdapter
+
+        spinnerDuration.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+
+                when (position) {
+
+                    0 -> {
+                        editor.putLong("playDuration", 5000)
+                        editor.apply()
+                    }
+
+                    1 -> {
+                        editor.putLong("playDuration", 10000)
+                        editor.apply()
+                    }
+
+                    2 -> {
+                        editor.putLong("playDuration", 30000)
+                        editor.apply()
+                    }
+
+                    3 -> {
+                        editor.putLong("playDuration", 100000)
+                        editor.apply()
+                    }
+
+                    4 -> {
+                        editor.putLong("playDuration", 0)
+                        editor.apply()
+                    }
+                }
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+            }
+        }
     }
 
     override fun onBackPressed() {

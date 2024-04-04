@@ -88,6 +88,7 @@ class LockScreenViewActivity : AppCompatActivity(), OnDoubleClickListener, OnSin
 
     }
 
+    // Animation Setting
     private fun animationSetting() {
 
         val durationPref = getSharedPreferences("Spinner", MODE_PRIVATE)
@@ -115,6 +116,8 @@ class LockScreenViewActivity : AppCompatActivity(), OnDoubleClickListener, OnSin
 
     }
 
+
+    // Lottie Animation
     private fun getAnimation() {
         val animationSharedPref = getSharedPreferences("SetAnimation", MODE_PRIVATE)
         var animationEditor: SharedPreferences.Editor = animationSharedPref.edit()
@@ -132,13 +135,21 @@ class LockScreenViewActivity : AppCompatActivity(), OnDoubleClickListener, OnSin
         }
 
     }
+
+
+    // Unregister Battery Percentage
     override fun onDestroy() {
         super.onDestroy()
         unregisterReceiver(batteryReceiver)
     }
+
+    // Double Click
     override fun onDoubleClick() {
         finish()
     }
+
+
+    // Single Click
     override fun onSingleClick() {
         binding.imgClick.setVisibility(View.VISIBLE)
         Handler().postDelayed({ binding.imgClick.setVisibility(View.INVISIBLE) }, 2000)
