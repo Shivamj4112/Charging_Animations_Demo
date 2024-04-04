@@ -84,9 +84,34 @@ class LockScreenViewActivity : AppCompatActivity(), OnDoubleClickListener, OnSin
             onSingleClick()
         }
 
-        Handler().postDelayed({
-            finish()
-        }, 3000)
+        animationSetting()
+
+    }
+
+    private fun animationSetting() {
+
+        val durationPref = getSharedPreferences("Spinner", MODE_PRIVATE)
+
+
+        // Play Duration
+        if (durationPref.contains("playDuration")) {
+            val playDurationMillis = durationPref.getLong("playDuration", 5000)
+
+            if (playDurationMillis.toInt() != 0) {
+                Handler().postDelayed({
+                    finish()
+                }, playDurationMillis)
+            }
+        }
+
+        // Show Battery
+        if (durationPref.getBoolean("featureEnabled", true)) {
+            binding.layoutBattery.visibility = View.GONE
+        } else {
+            binding.layoutBattery.visibility = View.VISIBLE
+        }
+
+
 
     }
 
@@ -105,20 +130,15 @@ class LockScreenViewActivity : AppCompatActivity(), OnDoubleClickListener, OnSin
             animationEditor.apply()
             binding.animationView.setAnimation(animationSharedPref.getInt("animation", 0))
         }
-        //        binding.animationView.setAnimation(R.raw.anim20)
-    }
 
+    }
     override fun onDestroy() {
         super.onDestroy()
         unregisterReceiver(batteryReceiver)
-//        stopService(Intent(this, Service::class.java))
-//        finish()
     }
-
     override fun onDoubleClick() {
         finish()
     }
-
     override fun onSingleClick() {
         binding.imgClick.setVisibility(View.VISIBLE)
         Handler().postDelayed({ binding.imgClick.setVisibility(View.INVISIBLE) }, 2000)
