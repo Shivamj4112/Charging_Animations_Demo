@@ -143,16 +143,27 @@ class LockScreenViewActivity : AppCompatActivity(), OnDoubleClickListener, OnSin
         unregisterReceiver(batteryReceiver)
     }
 
+
     // Double Click
     override fun onDoubleClick() {
-        finish()
+        val animationSharedPref = getSharedPreferences("Spinner", MODE_PRIVATE)
+        if (animationSharedPref.getBoolean("closingMethod", true)) {
+            finish()
+        }
+
     }
 
 
     // Single Click
     override fun onSingleClick() {
-        binding.imgClick.setVisibility(View.VISIBLE)
-        Handler().postDelayed({ binding.imgClick.setVisibility(View.INVISIBLE) }, 2000)
+        val animationSharedPref = getSharedPreferences("Spinner", MODE_PRIVATE)
+        if (!animationSharedPref.getBoolean("closingMethod", true)) {
+            finish()
+        } else {
+            binding.imgClick.setVisibility(View.VISIBLE)
+            Handler().postDelayed({ binding.imgClick.setVisibility(View.INVISIBLE) }, 2000)
+        }
+
     }
 
 }

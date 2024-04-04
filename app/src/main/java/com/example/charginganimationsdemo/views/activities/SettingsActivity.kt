@@ -31,13 +31,9 @@ class SettingsActivity : AppCompatActivity() {
 
 
             playDuration()
+            closingMethod()
 
 
-            val closingMethodItems = arrayOf("Double Click", "Single Click")
-            val closingMethodAdapter =
-                ArrayAdapter(this@SettingsActivity, R.layout.spinner_item, closingMethodItems)
-            closingMethodAdapter.setDropDownViewResource(R.layout.spinner_item)
-            spinnerClosingMethod.adapter = closingMethodAdapter
 
 
             switchPer.setOnCheckedChangeListener { _, isChecked ->
@@ -94,6 +90,38 @@ class SettingsActivity : AppCompatActivity() {
 
                     4 -> {
                         editor.putLong("playDuration", 0)
+                        editor.apply()
+                    }
+                }
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+            }
+        }
+    }
+
+    private fun ActivitySettingsBinding.closingMethod() {
+        val closingMethodItems = arrayOf("Double Click", "Single Click")
+        val closingMethodAdapter =
+            ArrayAdapter(this@SettingsActivity, R.layout.spinner_item, closingMethodItems)
+        closingMethodAdapter.setDropDownViewResource(R.layout.spinner_item)
+        spinnerClosingMethod.adapter = closingMethodAdapter
+
+        spinnerClosingMethod.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                when (position) {
+                    0 -> {
+                        editor.putBoolean("closingMethod", true)
+                        editor.apply()
+                    }
+
+                    1 -> {
+                        editor.putBoolean("closingMethod", false)
                         editor.apply()
                     }
                 }
