@@ -14,16 +14,14 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.example.charginganimationsdemo.R
 import com.example.charginganimationsdemo.databinding.ActivityLockScreenViewBinding
-import com.example.charginganimationsdemo.interfaces.DoubleClickHandler
 import com.example.charginganimationsdemo.interfaces.OnDoubleClickListener
 import com.example.charginganimationsdemo.interfaces.OnSingleClickListener
 
 class LockScreenViewActivity : AppCompatActivity(), OnDoubleClickListener, OnSingleClickListener {
 
     private lateinit var binding: ActivityLockScreenViewBinding
-    private val doubleClickHandler = DoubleClickHandler(this)
-//    private lateinit var sharedPref : SharedPreferences
-//    private lateinit var editor: SharedPreferences.Editor
+    private var lastClickTime: Long = 0
+    private val doubleClickThreshold: Long = 500
 
     private val batteryReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
@@ -49,15 +47,6 @@ class LockScreenViewActivity : AppCompatActivity(), OnDoubleClickListener, OnSin
 
         }
     }
-//    private val powerConnectReceiver = object : BroadcastReceiver() {
-//        override fun onReceive(context: Context?, intent: Intent?) {
-//            if (intent?.action == Intent.ACTION_POWER_CONNECTED) {
-//                Handler().postDelayed({
-//                    finish()
-//                }, 3000)
-//            }
-//        }
-//    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -75,13 +64,22 @@ class LockScreenViewActivity : AppCompatActivity(), OnDoubleClickListener, OnSin
 
         registerReceiver(batteryReceiver, IntentFilter(Intent.ACTION_BATTERY_CHANGED))
         registerReceiver(powerDisconnectReceiver, IntentFilter(Intent.ACTION_POWER_DISCONNECTED))
-//        registerReceiver(powerConnectReceiver, IntentFilter(Intent.ACTION_POWER_CONNECTED))
 
         getAnimation()
 
+//        binding.root.setOnClickListener {
+//            doubleClickHandler.handleClick()
+//            onSingleClick()
+//        }
+
         binding.root.setOnClickListener {
-            doubleClickHandler.handleClick()
-            onSingleClick()
+            if (isDoubleClick()) {
+                onDoubleClick()
+            } else {
+                onSingleClick()
+            }
+            binding.imgClick.setVisibility(View.VISIBLE)
+            Handler().postDelayed({ binding.imgClick.setVisibility(View.INVISIBLE) }, 2000)
         }
 
         animationSetting()
@@ -116,7 +114,6 @@ class LockScreenViewActivity : AppCompatActivity(), OnDoubleClickListener, OnSin
 
     }
 
-
     // Lottie Animation
     private fun getAnimation() {
         val animationSharedPref = getSharedPreferences("SetAnimation", MODE_PRIVATE)
@@ -136,13 +133,18 @@ class LockScreenViewActivity : AppCompatActivity(), OnDoubleClickListener, OnSin
 
     }
 
-
     // Unregister Battery Percentage
     override fun onDestroy() {
         super.onDestroy()
         unregisterReceiver(batteryReceiver)
     }
 
+    private fun isDoubleClick(): Boolean {
+        val clickTime = System.currentTimeMillis()
+        val isDoubleClick = clickTime - lastClickTime < doubleClickThreshold
+        lastClickTime = clickTime
+        return isDoubleClick
+    }
 
     // Double Click
     override fun onDoubleClick() {
