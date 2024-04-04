@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.REORDER_TASKS" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
@@ -25,20 +26,21 @@
 
         <service
             android:name=".services.Service"
-            android:foregroundServiceType="connectedDevice"></service>
+            android:foregroundServiceType="connectedDevice" />
 
         <activity
             android:name=".views.activities.AnimationListActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".views.activities.LockScreenViewActivity"
             android:excludeFromRecents="true"
+            android:launchMode="singleTask"
             android:exported="false" />
         <activity
             android:name=".views.activities.MainActivity"
@@ -51,6 +53,8 @@
                 <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
             </intent-filter>
         </receiver>
+
+
     </application>
 
 </manifest>

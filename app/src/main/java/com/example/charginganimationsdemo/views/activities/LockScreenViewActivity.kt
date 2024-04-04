@@ -1,5 +1,6 @@
 package com.example.charginganimationsdemo.views.activities
 
+import android.app.ActivityManager
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -8,6 +9,8 @@ import android.content.SharedPreferences
 import android.os.BatteryManager
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
+import android.view.KeyEvent
 import android.view.View
 import android.view.WindowManager
 import androidx.activity.enableEdgeToEdge
@@ -16,6 +19,7 @@ import com.example.charginganimationsdemo.R
 import com.example.charginganimationsdemo.databinding.ActivityLockScreenViewBinding
 import com.example.charginganimationsdemo.interfaces.OnDoubleClickListener
 import com.example.charginganimationsdemo.interfaces.OnSingleClickListener
+
 
 class LockScreenViewActivity : AppCompatActivity(), OnDoubleClickListener, OnSingleClickListener {
 
@@ -51,7 +55,9 @@ class LockScreenViewActivity : AppCompatActivity(), OnDoubleClickListener, OnSin
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        window.addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED or WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD or WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON or WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON or WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION)
+
+
+        window.addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED or WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON or WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON or WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION)
         window.decorView.apply {
             systemUiVisibility =
                 View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
@@ -67,21 +73,27 @@ class LockScreenViewActivity : AppCompatActivity(), OnDoubleClickListener, OnSin
         getAnimation()
         playDuration()
 
-//        binding.root.setOnClickListener {
-//            doubleClickHandler.handleClick()
-//            onSingleClick()
-//        }
 
         binding.root.setOnClickListener {
-            if (isDoubleClick()) {
-                onDoubleClick()
-            } else {
+
+
+            val durationPref = getSharedPreferences("Spinner", MODE_PRIVATE)
+            val selectedClosingMethodText =
+                durationPref.getString("selectedClosingMethod", "Double Click")
+
+            if (selectedClosingMethodText == "Single Click") {
                 onSingleClick()
+                Log.e("Testinf Error", "onCreate: --------- if condition ")
+            } else {
+                if (isDoubleClick()) {
+                    onDoubleClick()
+
+                }
             }
+
             binding.imgClick.setVisibility(View.VISIBLE)
             Handler().postDelayed({ binding.imgClick.setVisibility(View.INVISIBLE) }, 2000)
         }
-
 
 
     }
@@ -97,24 +109,23 @@ class LockScreenViewActivity : AppCompatActivity(), OnDoubleClickListener, OnSin
 
         val durationPref = getSharedPreferences("Spinner", MODE_PRIVATE)
 
-
-        // Play Duration
-        if (durationPref.contains("playDuration")) {
-            val playDurationMillis = durationPref.getLong("playDuration", 5000)
-
-            if (playDurationMillis.toInt() != 0) {
-                Handler().postDelayed({
-                    finish()
-                }, playDurationMillis)
-            }
+        val selectedDurationText = durationPref.getString("selectedDuration", "3 secs")
+        val selectedDurationMillis = when (selectedDurationText) {
+            "3 secs" -> 3000L
+            "5 secs" -> 5000L
+            "10 secs" -> 10000L
+            "30 secs" -> 30000L
+            "1 min" -> 60000L
+            "loop" -> 0L
+            else -> 3000L
         }
 
-        // Show Battery
-//        if (durationPref.getBoolean("showPercentage", true)) {
-//            binding.layoutBattery.visibility = View.VISIBLE
+        if (selectedDurationMillis != 0L) {
+            Handler().postDelayed({
+                finish()
+            }, selectedDurationMillis)
+        }
 //        }
-
-
 
     }
 
@@ -137,7 +148,7 @@ class LockScreenViewActivity : AppCompatActivity(), OnDoubleClickListener, OnSin
 
     }
 
-    // Unregister Battery Percentage
+
     override fun onDestroy() {
         super.onDestroy()
         unregisterReceiver(batteryReceiver)
@@ -150,24 +161,30 @@ class LockScreenViewActivity : AppCompatActivity(), OnDoubleClickListener, OnSin
         return isDoubleClick
     }
 
-    // Double Click
+
     override fun onDoubleClick() {
-        val animationSharedPref = getSharedPreferences("Spinner", MODE_PRIVATE)
-        if (animationSharedPref.getBoolean("closingMethod", true)) {
+//        val animationSharedPref = getSharedPreferences("Spinner", MODE_PRIVATE)
+//        if (animationSharedPref.getBoolean("closingMethod", true)) {
             finish()
-        }
+//        }
     }
 
-    // Single Click
-    override fun onSingleClick() {
-        val animationSharedPref = getSharedPreferences("Spinner", MODE_PRIVATE)
-        if (!animationSharedPref.getBoolean("closingMethod", true)) {
-            finish()
-        } else {
-            binding.imgClick.setVisibility(View.VISIBLE)
-            Handler().postDelayed({ binding.imgClick.setVisibility(View.INVISIBLE) }, 2000)
-        }
 
+    override fun onSingleClick() {
+            finish()
+
+
+    }
+
+    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+        return super.onKeyDown(keyCode, event)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        val activityManager = applicationContext
+            .getSystemService(ACTIVITY_SERVICE) as ActivityManager
+        activityManager.moveTaskToFront(taskId, 0)
     }
 
 }
