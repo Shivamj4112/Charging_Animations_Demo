@@ -51,21 +51,21 @@ class LockScreenViewActivity : AppCompatActivity(), OnDoubleClickListener, OnSin
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-
-
         window.addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED or WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD or WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON or WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON or WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION)
         window.decorView.apply {
             systemUiVisibility =
                 View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
         }
-
         binding = ActivityLockScreenViewBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        showBattery()
 
         registerReceiver(batteryReceiver, IntentFilter(Intent.ACTION_BATTERY_CHANGED))
         registerReceiver(powerDisconnectReceiver, IntentFilter(Intent.ACTION_POWER_DISCONNECTED))
 
         getAnimation()
+        playDuration()
 
 //        binding.root.setOnClickListener {
 //            doubleClickHandler.handleClick()
@@ -82,12 +82,18 @@ class LockScreenViewActivity : AppCompatActivity(), OnDoubleClickListener, OnSin
             Handler().postDelayed({ binding.imgClick.setVisibility(View.INVISIBLE) }, 2000)
         }
 
-        animationSetting()
+
 
     }
 
+    private fun showBattery() {
+        val sharedPref = getSharedPreferences("Spinner", MODE_PRIVATE)
+        val showBattery = sharedPref.getBoolean("showPercentage", true)
+        binding.layoutBattery.visibility = if (showBattery) View.VISIBLE else View.INVISIBLE
+    }
+
     // Animation Setting
-    private fun animationSetting() {
+    private fun playDuration() {
 
         val durationPref = getSharedPreferences("Spinner", MODE_PRIVATE)
 
@@ -104,11 +110,9 @@ class LockScreenViewActivity : AppCompatActivity(), OnDoubleClickListener, OnSin
         }
 
         // Show Battery
-        if (durationPref.getBoolean("featureEnabled", true)) {
-            binding.layoutBattery.visibility = View.GONE
-        } else {
-            binding.layoutBattery.visibility = View.VISIBLE
-        }
+//        if (durationPref.getBoolean("showPercentage", true)) {
+//            binding.layoutBattery.visibility = View.VISIBLE
+//        }
 
 
 
@@ -152,9 +156,7 @@ class LockScreenViewActivity : AppCompatActivity(), OnDoubleClickListener, OnSin
         if (animationSharedPref.getBoolean("closingMethod", true)) {
             finish()
         }
-
     }
-
 
     // Single Click
     override fun onSingleClick() {

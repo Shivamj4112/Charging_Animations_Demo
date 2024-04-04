@@ -28,6 +28,11 @@ class AnimationListActivity : AppCompatActivity() {
         binding = ActivityAnimationListBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val sharedPref = getSharedPreferences("Spinner", MODE_PRIVATE)
+        val editor = sharedPref.edit()
+        editor.putBoolean("showPercentage", true)
+        editor.apply()
+
         binding.apply {
 
             adapter = ItemAdapter {

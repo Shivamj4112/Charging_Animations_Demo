@@ -34,17 +34,19 @@ class SettingsActivity : AppCompatActivity() {
             closingMethod()
 
 
-
+            switchPer.isChecked = sharedPref.getBoolean("showPercentage", true)
 
             switchPer.setOnCheckedChangeListener { _, isChecked ->
                 if (isChecked) {
-                    editor.putBoolean("featureEnabled", true)
+                    editor.putBoolean("showPercentage", true)
+                    editor.apply()
                 } else {
-                    editor.putBoolean("featureEnabled", false)
+                    editor.putBoolean("showPercentage", false)
+                    editor.apply()
                 }
-                editor.apply()
+
             }
-            switchPer.isChecked = sharedPref.getBoolean("featureEnabled", true)
+
 
         }
 

@@ -42,7 +42,7 @@
             android:exported="false" />
         <activity
             android:name=".views.activities.MainActivity"
-            android:exported="false"></activity>
+            android:exported="false" />
 
         <receiver
             android:name=".services.PowerConnectionReceiver"

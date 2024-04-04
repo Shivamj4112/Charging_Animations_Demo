@@ -194,9 +194,9 @@
                     android:id="@+id/switchPer"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
+                    android:checked="true"
                     android:layout_alignParentRight="true"
                     android:background="@drawable/cb_selector"
-                    android:checked="true"
                     android:textOff=""
                     android:textOn="" />
             </RelativeLayout>
