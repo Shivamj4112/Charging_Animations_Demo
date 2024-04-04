@@ -42,7 +42,6 @@ class LockScreenViewActivity : AppCompatActivity(), OnDoubleClickListener, OnSin
             binding.tvPercentage.text = "$roundedBatteryPct %"
         }
     }
-
     private val powerDisconnectReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
             if (intent?.action == Intent.ACTION_POWER_DISCONNECTED) {
@@ -94,8 +93,6 @@ class LockScreenViewActivity : AppCompatActivity(), OnDoubleClickListener, OnSin
             binding.imgClick.setVisibility(View.VISIBLE)
             Handler().postDelayed({ binding.imgClick.setVisibility(View.INVISIBLE) }, 2000)
         }
-
-
     }
 
     private fun showBattery() {
@@ -125,8 +122,6 @@ class LockScreenViewActivity : AppCompatActivity(), OnDoubleClickListener, OnSin
                 finish()
             }, selectedDurationMillis)
         }
-//        }
-
     }
 
     // Lottie Animation
@@ -148,7 +143,6 @@ class LockScreenViewActivity : AppCompatActivity(), OnDoubleClickListener, OnSin
 
     }
 
-
     override fun onDestroy() {
         super.onDestroy()
         unregisterReceiver(batteryReceiver)
@@ -162,29 +156,9 @@ class LockScreenViewActivity : AppCompatActivity(), OnDoubleClickListener, OnSin
     }
 
 
-    override fun onDoubleClick() {
-//        val animationSharedPref = getSharedPreferences("Spinner", MODE_PRIVATE)
-//        if (animationSharedPref.getBoolean("closingMethod", true)) {
-            finish()
-//        }
-    }
+    override fun onDoubleClick() { finish() }
 
+    override fun onSingleClick() { finish() }
 
-    override fun onSingleClick() {
-            finish()
-
-
-    }
-
-    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
-        return super.onKeyDown(keyCode, event)
-    }
-
-    override fun onPause() {
-        super.onPause()
-        val activityManager = applicationContext
-            .getSystemService(ACTIVITY_SERVICE) as ActivityManager
-        activityManager.moveTaskToFront(taskId, 0)
-    }
 
 }
