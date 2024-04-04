@@ -8,4 +8,7 @@
     <color name="color_circle">#ff4f21ab</color>
     <color name="color_bg">#404040</color>
     <color name="color_spinner">#ff989898</color>
+    <color name="sv_slider_color_default">#3F51B5</color>
+    <color name="sv_button_color_default">#FFFFFF</color>
+    <color name="sv_stroke_color_default">#FFFFFF</color>
 </resources>
