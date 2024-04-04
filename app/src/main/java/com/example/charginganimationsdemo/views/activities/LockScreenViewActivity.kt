@@ -37,7 +37,7 @@ class LockScreenViewActivity : AppCompatActivity(), OnDoubleClickListener, OnSin
             val scale: Int? = batteryStatus?.getIntExtra(BatteryManager.EXTRA_SCALE, -1)
 
             val batteryPct: Float = (level ?: 0).toFloat() / (scale ?: 100).toFloat() * 100
-            val roundedBatteryPct = batteryPct.toInt() // Round the battery percentage
+            val roundedBatteryPct = batteryPct.toInt()
 
             binding.tvPercentage.text = "$roundedBatteryPct %"
         }
