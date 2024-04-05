@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.b.setOnClickListener {
+        binding.mcvStartAnimation.setOnClickListener {
 
             startActivity(Intent(this,AnimationListActivity::class.java))
         }
