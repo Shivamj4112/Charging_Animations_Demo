@@ -10,17 +10,17 @@
 
 <h2>Project Screenshots:</h2>
 
-<img src="https://github.com/Shivamj4112/Charging_Animations_Demo/assets/101393149/1bec5a55-382c-4d7c-b68e-a7bf28967323" alt="project-screenshot" width="300" height="500/">
+<img src="https://github.com/Shivamj4112/Charging_Animations_Demo/assets/101393149/1bec5a55-382c-4d7c-b68e-a7bf28967323" alt="project-screenshot" width="300" height="600/">
 
-<img src="https://github.com/Shivamj4112/Charging_Animations_Demo/assets/101393149/da15def4-13bf-4cda-b88b-69154101cb55" alt="project-screenshot" width="300" height="500/">
+<img src="https://github.com/Shivamj4112/Charging_Animations_Demo/assets/101393149/da15def4-13bf-4cda-b88b-69154101cb55" alt="project-screenshot" width="300" height="600/">
 
-<img src="https://github.com/Shivamj4112/Charging_Animations_Demo/assets/101393149/e2e8d77b-abe9-4768-89f0-33be065116af" alt="project-screenshot" width="300" height="500/">
+<img src="https://github.com/Shivamj4112/Charging_Animations_Demo/assets/101393149/e2e8d77b-abe9-4768-89f0-33be065116af" alt="project-screenshot" width="300" height="600/">
 
-<img src="https://github.com/Shivamj4112/Charging_Animations_Demo/assets/101393149/1eb19112-ea65-47ac-84c2-0c04738506c7" alt="project-screenshot" width="300" height="500/">
+<img src="https://github.com/Shivamj4112/Charging_Animations_Demo/assets/101393149/1eb19112-ea65-47ac-84c2-0c04738506c7" alt="project-screenshot" width="300" height="600/">
 
-<img src="https://github.com/Shivamj4112/Charging_Animations_Demo/assets/101393149/5fde7315-5f88-4cdd-a58c-71a579c224c4" alt="project-screenshot" width="300" height="500/">
+<img src="https://github.com/Shivamj4112/Charging_Animations_Demo/assets/101393149/5fde7315-5f88-4cdd-a58c-71a579c224c4" alt="project-screenshot" width="300" height="600/">
 
-<img src="https://github.com/Shivamj4112/Charging_Animations_Demo/assets/101393149/a69a8b33-159a-4f2f-bdad-fb253dab9e40" alt="project-screenshot" width="300" height="500/">
+<img src="https://github.com/Shivamj4112/Charging_Animations_Demo/assets/101393149/a69a8b33-159a-4f2f-bdad-fb253dab9e40" alt="project-screenshot" width="300" height="600/">
 
   
   
