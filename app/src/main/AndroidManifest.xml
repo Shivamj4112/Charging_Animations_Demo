@@ -8,7 +8,7 @@
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_CONNECTED_DEVICE" />
 
     <application
@@ -21,7 +21,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ChargingAnimationsDemo"
         tools:targetApi="31">
-
+        <activity
+            android:name=".views.Intro.SplashActivity"
+            android:exported="false" />
         <activity
             android:name=".views.activities.SettingsActivity"
             android:exported="false" />
@@ -32,22 +34,20 @@
 
         <activity
             android:name=".views.activities.AnimationListActivity"
-            android:exported="false"/>
-
+            android:exported="false" />
         <activity
             android:name=".views.activities.LockScreenViewActivity"
             android:excludeFromRecents="true"
-            android:launchMode="singleTask"
-            android:exported="false" />
-
+            android:exported="false"
+            android:launchMode="singleTask" />
         <activity
             android:name=".views.activities.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
 
         <receiver
@@ -58,8 +58,6 @@
                 <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
             </intent-filter>
         </receiver>
-
-
     </application>
 
 </manifest>
