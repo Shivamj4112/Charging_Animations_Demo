@@ -88,7 +88,6 @@
             app:state_complete="false"
             app:bump_vibration="200"
             app:rotate_icon="false"
-            app:complete_icon="@drawable/ic_lock_open"
             app:bounce_on_start="true"/>
 
     </LinearLayout>
