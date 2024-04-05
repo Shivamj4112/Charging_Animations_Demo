@@ -32,7 +32,7 @@ Here're some of the project's best features:
 *   Set a custom time to close the animation or keep it in a loop.
 *   Single-click or double-click on the screen to close the animation.
 *   Show or hide the battery percentage in the animation.
-*   Swipe to close animation (Coming Soon).
+*   Swipe to close animation
 
   
   
