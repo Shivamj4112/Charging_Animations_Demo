@@ -227,17 +227,19 @@ class Service : Service() {
 
     private fun powerWasConnected(context: Context) {
         Log.d("TAG", "powerWasConnected: Power is connected")
-//
+
 //        CoroutineScope(Dispatchers.IO + job).launch {
             val lockScreenIntent = Intent(context, LockScreenViewActivity::class.java)
             lockScreenIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
 
 
 //            withContext(Dispatchers.Main) {
-//                // Update UI if needed after background task completion
+                // Update UI if needed after background task completion
                 context.startActivity(lockScreenIntent)
 //            }
 //        }
+
+
 
     }
 

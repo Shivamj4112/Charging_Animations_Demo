@@ -27,6 +27,16 @@ class LockScreenViewActivity : AppCompatActivity(), OnDoubleClickListener, OnSin
     private var lastClickTime: Long = 0
     private val doubleClickThreshold: Long = 500
 
+    private var connectionChangedReceiver: BroadcastReceiver = object : BroadcastReceiver() {
+            override fun onReceive(context: Context, intent: Intent) {
+                when {
+                    intent.action == Intent.ACTION_POWER_CONNECTED ->{}
+
+                    intent.action == Intent.ACTION_POWER_DISCONNECTED ->{}
+                }
+            }
+        }
+
     private val batteryReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
             val batteryStatus: Intent? =
@@ -63,6 +73,13 @@ class LockScreenViewActivity : AppCompatActivity(), OnDoubleClickListener, OnSin
         }
         binding = ActivityLockScreenViewBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+
+        val connectionChangedIntent = IntentFilter().apply {
+            addAction(Intent.ACTION_POWER_CONNECTED)
+            addAction(Intent.ACTION_POWER_DISCONNECTED)
+        }
+        registerReceiver(connectionChangedReceiver, connectionChangedIntent)
 
         showBattery()
 
@@ -173,6 +190,7 @@ class LockScreenViewActivity : AppCompatActivity(), OnDoubleClickListener, OnSin
     override fun onDestroy() {
         super.onDestroy()
         unregisterReceiver(batteryReceiver)
+        unregisterReceiver(connectionChangedReceiver)
     }
 
     private fun isDoubleClick(): Boolean {

@@ -7,6 +7,9 @@ import android.view.View
 import android.view.WindowManager
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import com.example.charginganimationsdemo.R
 import com.example.charginganimationsdemo.databinding.ActivityDefaultAnimationBinding
 import com.example.charginganimationsdemo.services.Service
 
