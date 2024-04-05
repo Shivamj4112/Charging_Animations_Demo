@@ -84,6 +84,7 @@
             app:icon_margin="@dimen/_7sdp"
             app:slider_icon="@drawable/ic_lock"
             app:slider_height="50dp"
+            android:visibility="gone"
             app:state_complete="false"
             app:bump_vibration="200"
             app:bounce_on_start="true"/>

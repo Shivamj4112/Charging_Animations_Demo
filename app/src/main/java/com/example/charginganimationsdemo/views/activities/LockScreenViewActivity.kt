@@ -1,6 +1,5 @@
 package com.example.charginganimationsdemo.views.activities
 
-import android.app.ActivityManager
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -10,15 +9,16 @@ import android.os.BatteryManager
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
-import android.view.KeyEvent
 import android.view.View
 import android.view.WindowManager
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.example.charginganimationsdemo.R
 import com.example.charginganimationsdemo.databinding.ActivityLockScreenViewBinding
 import com.example.charginganimationsdemo.interfaces.OnDoubleClickListener
 import com.example.charginganimationsdemo.interfaces.OnSingleClickListener
+import com.ncorti.slidetoact.SlideToActView
 
 
 class LockScreenViewActivity : AppCompatActivity(), OnDoubleClickListener, OnSingleClickListener {
@@ -73,25 +73,52 @@ class LockScreenViewActivity : AppCompatActivity(), OnDoubleClickListener, OnSin
         playDuration()
 
 
+        val durationPref = getSharedPreferences("Spinner", MODE_PRIVATE)
+        val selectedClosingMethodText = durationPref.getString("selectedClosingMethod", "Double Click")
+        if(selectedClosingMethodText == "Swipe") {
+
+            binding.savSlideButton.visibility = View.VISIBLE
+            binding.imgClick.visibility = View.GONE
+
+            binding.savSlideButton.onSlideCompleteListener =
+                object : SlideToActView.OnSlideCompleteListener {
+                    override fun onSlideComplete(view: SlideToActView) {
+
+                        finish()
+                    }
+                }
+        }
+        else if (selectedClosingMethodText == "Single Click"){
+            binding.imgClick.visibility = View.GONE
+            binding.savSlideButton.visibility = View.GONE
+        }
+        else{
+            binding.savSlideButton.visibility = View.GONE
+        }
+
+
+
         binding.root.setOnClickListener {
 
-
             val durationPref = getSharedPreferences("Spinner", MODE_PRIVATE)
-            val selectedClosingMethodText =
-                durationPref.getString("selectedClosingMethod", "Double Click")
+            val selectedClosingMethodText = durationPref.getString("selectedClosingMethod", "Double Click")
 
             if (selectedClosingMethodText == "Single Click") {
                 onSingleClick()
-                Log.e("Testinf Error", "onCreate: --------- if condition ")
-            } else {
-                if (isDoubleClick()) {
-                    onDoubleClick()
-
-                }
+                binding.imgClick.visibility = View.GONE
             }
 
-            binding.imgClick.setVisibility(View.VISIBLE)
+            else if(selectedClosingMethodText == "Double Click"){
+                binding.imgClick.visibility = View.VISIBLE
+                if (isDoubleClick()) {
+                    onDoubleClick()
+                }
+            }
+            else{
+                binding.imgClick.visibility = View.GONE
+            }
             Handler().postDelayed({ binding.imgClick.setVisibility(View.INVISIBLE) }, 2000)
+
         }
     }
 

@@ -83,7 +83,7 @@ class SettingsActivity : AppCompatActivity() {
     }
 
     private fun ActivitySettingsBinding.closingMethod() {
-        val closingMethodItems = arrayOf("Double Click", "Single Click")
+        val closingMethodItems = arrayOf("Double Click", "Single Click" , "Swipe")
         val closingMethodAdapter =
             ArrayAdapter(this@SettingsActivity, R.layout.spinner_item, closingMethodItems)
         closingMethodAdapter.setDropDownViewResource(R.layout.spinner_item)
