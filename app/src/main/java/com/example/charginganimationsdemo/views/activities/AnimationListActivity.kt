@@ -37,7 +37,7 @@ class AnimationListActivity : AppCompatActivity() {
 
             adapter = ItemAdapter {
 
-                val intent = Intent(this@AnimationListActivity, MainActivity::class.java)
+                val intent = Intent(this@AnimationListActivity, DefaultAnimationActivity::class.java)
                 intent.putExtra("anim", it)
                 startActivity(intent)
             }

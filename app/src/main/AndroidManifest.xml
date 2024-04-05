@@ -22,6 +22,9 @@
         android:theme="@style/Theme.ChargingAnimationsDemo"
         tools:targetApi="31">
         <activity
+            android:name=".views.activities.DefaultAnimationActivity"
+            android:exported="false" />
+        <activity
             android:name=".views.Intro.SplashActivity"
             android:exported="false" />
         <activity
@@ -40,6 +43,7 @@
             android:excludeFromRecents="true"
             android:exported="false"
             android:launchMode="singleTask" />
+
         <activity
             android:name=".views.activities.MainActivity"
             android:exported="true">
