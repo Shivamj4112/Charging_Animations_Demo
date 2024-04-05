@@ -239,8 +239,6 @@ class Service : Service() {
 //            }
 //        }
 
-
-
     }
 
 
