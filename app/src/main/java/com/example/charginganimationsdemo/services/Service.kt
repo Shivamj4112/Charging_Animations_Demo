@@ -11,7 +11,10 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.ServiceInfo
 import android.os.Build
+import android.os.Handler
 import android.os.IBinder
+import android.os.Looper
+import android.os.Message
 import android.util.Log
 import android.view.WindowManager
 import androidx.core.app.NotificationCompat
@@ -141,15 +144,18 @@ import com.example.charginganimationsdemo.views.activities.MainActivity
 //            customLockScreenView = null
 //        }
 //    }
+//private fun clearFilter() {
+
+//        customLockScreenView?.let {
+//            windowManager?.removeViewImmediate(it)
+//            customLockScreenView = null
+//        }
+//}
 //}
 
 
 
 class Service : Service() {
-
-    private var customLockScreenView: CustomLockScreenView? = null
-    private var windowManager: WindowManager? = null
-
 
     companion object {
         private const val CHANNEL_ID = "ForegroundServiceChannel"
@@ -169,10 +175,13 @@ class Service : Service() {
             }
         }
 
+
     override fun onCreate() {
-        val connectionChangedIntent = IntentFilter()
-        connectionChangedIntent.addAction(Intent.ACTION_POWER_CONNECTED)
-        connectionChangedIntent.addAction(Intent.ACTION_POWER_DISCONNECTED)
+        val connectionChangedIntent = IntentFilter().apply {
+            addAction(Intent.ACTION_POWER_CONNECTED)
+            addAction(Intent.ACTION_POWER_DISCONNECTED)
+        }
+
         registerReceiver(connectionChangedReceiver, connectionChangedIntent)
 
 
@@ -195,6 +204,7 @@ class Service : Service() {
             )
         }
     }
+
 
     override fun onStartCommand(
         resultIntent: Intent, resultCode: Int, startId: Int
@@ -221,7 +231,6 @@ class Service : Service() {
     }
 
 
-
     private fun powerWasDisconnected(context: Context) {
 
         Log.d("TAG", "powerWasDisconnected: Power is disconnected")
@@ -242,11 +251,5 @@ class Service : Service() {
             .build()
     }
 
-    private fun clearFilter() {
 
-//        customLockScreenView?.let {
-//            windowManager?.removeViewImmediate(it)
-//            customLockScreenView = null
-//        }
-    }
 }

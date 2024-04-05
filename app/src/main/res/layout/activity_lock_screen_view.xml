@@ -30,6 +30,7 @@
         android:layout_centerHorizontal="true"
         android:layout_above="@+id/layoutBattery"
         android:layout_marginBottom="@dimen/_50sdp"
+        android:visibility="gone"
         app:lottie_loop="true"
         app:lottie_speed="1" />
 
