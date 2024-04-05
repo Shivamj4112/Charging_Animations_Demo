@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/color_toolbar"
     tools:context=".views.activities.MainActivity">
 
@@ -53,21 +53,21 @@
 
         <ImageView
             android:id="@+id/imgPreview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
             android:layout_alignParentRight="true"
-            android:layout_margin="@dimen/_25sdp"
+            android:layout_margin="@dimen/_20sdp"
             android:background="@drawable/circle"
-            android:padding="@dimen/_16sdp"
+            android:padding="@dimen/_11sdp"
             android:src="@drawable/ic_preview" />
 
         <ImageView
             android:id="@+id/iv_back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/_25sdp"
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_margin="@dimen/_20sdp"
             android:background="@drawable/circle"
-            android:padding="@dimen/_16sdp"
+            android:padding="@dimen/_12sdp"
             android:src="@drawable/ic_back" />
 
         <LinearLayout
@@ -78,25 +78,26 @@
             android:layout_marginBottom="@dimen/_25sdp"
             android:gravity="center">
 
+
             <TextView
                 android:id="@+id/btApply"
                 android:layout_width="@dimen/_110sdp"
-                android:layout_height="@dimen/_45sdp"
+                android:layout_height="@dimen/_35sdp"
                 android:background="@drawable/rounded_bg"
                 android:fontFamily="@font/regular"
                 android:gravity="center"
                 android:text="@string/apply"
                 android:textColor="@color/white"
-                android:textSize="@dimen/_14ssp" />
+                android:textSize="@dimen/_12ssp" />
 
             <ImageView
                 android:id="@+id/iv_OpenSettings"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/_35sdp"
+                android:layout_height="@dimen/_35sdp"
                 android:layout_alignParentRight="true"
-                android:layout_marginLeft="@dimen/_25sdp"
+                android:layout_marginLeft="@dimen/_20sdp"
                 android:background="@drawable/circle"
-                android:padding="@dimen/_16sdp"
+                android:padding="@dimen/_11sdp"
                 android:src="@drawable/ic_setting" />
         </LinearLayout>
 
