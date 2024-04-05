@@ -22,6 +22,11 @@ import com.example.charginganimationsdemo.R
 import com.example.charginganimationsdemo.util.CustomLockScreenView
 import com.example.charginganimationsdemo.views.activities.LockScreenViewActivity
 import com.example.charginganimationsdemo.views.activities.MainActivity
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 //class Service : Service() {
 //
@@ -161,6 +166,7 @@ class Service : Service() {
         private const val CHANNEL_ID = "ForegroundServiceChannel"
         private const val NOTIFICATION_ID = 1
     }
+    private lateinit var job: Job
 
     private var connectionChangedReceiver: BroadcastReceiver =
         object : BroadcastReceiver() {
@@ -177,14 +183,12 @@ class Service : Service() {
 
 
     override fun onCreate() {
+        job = Job()
         val connectionChangedIntent = IntentFilter().apply {
             addAction(Intent.ACTION_POWER_CONNECTED)
             addAction(Intent.ACTION_POWER_DISCONNECTED)
         }
-
         registerReceiver(connectionChangedReceiver, connectionChangedIntent)
-
-
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val serviceChannel = NotificationChannel(
@@ -223,10 +227,19 @@ class Service : Service() {
 
     private fun powerWasConnected(context: Context) {
         Log.d("TAG", "powerWasConnected: Power is connected")
+//
+//        CoroutineScope(Dispatchers.IO + job).launch {
+            val lockScreenIntent = Intent(context, LockScreenViewActivity::class.java)
+            lockScreenIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
 
-        val lockScreenIntent = Intent(context, LockScreenViewActivity::class.java)
-        lockScreenIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
-        context.startActivity(lockScreenIntent)
+
+//            withContext(Dispatchers.Main) {
+//                // Update UI if needed after background task completion
+                context.startActivity(lockScreenIntent)
+//            }
+//        }
+
+
 
     }
 
