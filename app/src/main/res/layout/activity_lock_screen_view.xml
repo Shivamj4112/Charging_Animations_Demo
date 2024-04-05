@@ -8,12 +8,14 @@
     android:background="@color/color_toolbar"
     tools:context=".views.activities.LockScreenViewActivity">
 
+
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/animationView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerInParent="true"
         app:lottie_autoPlay="true"
+        android:layout_margin="@dimen/_45sdp"
         app:lottie_rawRes="@raw/anim20"
         app:lottie_loop="true"
         app:lottie_speed="1" />
@@ -30,6 +32,7 @@
         <FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:visibility="gone"
             android:layout_centerInParent="true">
 
             <VideoView
@@ -43,11 +46,11 @@
 
     <LinearLayout
         android:id="@+id/layoutBattery"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="@dimen/_35sdp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/_50sdp"
         android:clickable="false"
         android:focusable="false"
         android:orientation="vertical">
@@ -57,18 +60,37 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_margin="@dimen/_10sdp"
+            android:layout_marginHorizontal="@dimen/_10sdp"
             android:fontFamily="@font/regular"
             android:text="10%"
             android:textColor="@color/white"
             android:textSize="@dimen/_30ssp" />
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
             android:layout_gravity="center_horizontal"
             android:src="@drawable/ic_battery" />
+
+        <com.ncorti.slidetoact.SlideToActView
+            android:id="@+id/sav_slideButton"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginHorizontal="@dimen/_20sdp"
+            app:text="Swipe to close"
+            app:area_margin="8dp"
+            app:outer_color="#494848"
+            app:icon_margin="@dimen/_7sdp"
+            app:slider_icon="@drawable/ic_lock"
+            app:slider_height="50dp"
+            app:state_complete="false"
+            app:bump_vibration="200"
+            app:bounce_on_start="true"/>
+
     </LinearLayout>
+
+
 
     <ImageView
         android:id="@+id/imgClick"
