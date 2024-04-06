@@ -49,7 +49,6 @@ class DefaultAnimationActivity : AppCompatActivity() {
             animationView.setAnimation(anim)
 
             imgPreview.setOnClickListener {
-
                 ivOpenSettings.visibility = View.GONE
                 btApply.visibility = View.GONE
                 ivBack.visibility = View.GONE
