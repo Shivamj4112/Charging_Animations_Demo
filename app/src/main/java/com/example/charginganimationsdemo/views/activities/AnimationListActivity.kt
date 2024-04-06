@@ -42,7 +42,6 @@ class AnimationListActivity : AppCompatActivity() {
                 startActivity(intent)
             }
 
-
             recylerview.layoutManager = GridLayoutManager(this@AnimationListActivity, 2)
             recylerview.adapter = adapter
 
