@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.mcvSelectAnimation.setOnClickListener {
 
-            startActivity(Intent(this,CustomActivity::class.java))
+            startActivity(Intent(this,CustomAnimationListActivity::class.java))
         }
 
     }
